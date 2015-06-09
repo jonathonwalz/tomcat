@@ -24,6 +24,8 @@ attribute :shutdown_port,
 # The rest will inherit from node attributes
 attribute :config_dir,
   :kind_of => String
+attribute :config_template_cookbook,
+  :kind_of => String
 attribute :log_dir,
   :kind_of => String
 attribute :work_dir,

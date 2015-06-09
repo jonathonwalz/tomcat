@@ -8,11 +8,11 @@ action :configure do
    :max_threads, :ssl_max_threads, :ssl_cert_file, :ssl_key_file,
    :ssl_chain_files, :keystore_file, :keystore_type, :truststore_file,
    :truststore_type, :certificate_dn, :loglevel, :tomcat_auth, :user,
-   :group, :tmp_dir, :lib_dir, :endorsed_dir].each do |attr|
+   :group, :tmp_dir, :lib_dir, :endorsed_dir, :config_template_cookbook].each do |attr|
     if not new_resource.instance_variable_get("@#{attr}")
       new_resource.instance_variable_set("@#{attr}", node['tomcat'][attr])
     end
-  end 
+  end
 
   if new_resource.name == 'base'
     instance = base_instance
@@ -170,6 +170,7 @@ action :configure do
 
   template "#{new_resource.config_dir}/server.xml" do
     source 'server.xml.erb'
+    cookbook new_resource.config_template_cookbook
       variables ({
         :port => new_resource.port,
         :proxy_port => new_resource.proxy_port,
@@ -192,6 +193,7 @@ action :configure do
 
   template "#{new_resource.config_dir}/logging.properties" do
     source 'logging.properties.erb'
+    cookbook new_resource.config_template_cookbook
     owner 'root'
     group 'root'
     mode '0644'

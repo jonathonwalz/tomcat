@@ -33,6 +33,7 @@ Attributes
 * `node["tomcat"]["tomcat_auth"]` -
 * `node["tomcat"]["instances"]` - A dictionary defining additional tomcat instances to run.
 * `node["tomcat"]["run_base_instance"]` - Whether or not to run the "base" tomcat instance, default `true`.
+* `node["tomcat"]["config_template_cookbook"]` - The bundle to use for server.xml.erb and logging.properties.erb, default `tomcat`.
 * `node["tomcat"]["user"]` -
 * `node["tomcat"]["group"]` -
 * `node["tomcat"]["home"]` -
